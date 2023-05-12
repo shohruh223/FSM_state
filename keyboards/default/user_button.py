@@ -7,3 +7,10 @@ def user_rkm() -> ReplyKeyboardMarkup:
     rkm.add(button)
     return rkm
 
+
+def cancel():
+    rkm = ReplyKeyboardMarkup(resize_keyboard=True)
+    button = KeyboardButton(text="/cancel")
+    rkm.add(button)
+    return rkm
+

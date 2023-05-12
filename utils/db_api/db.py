@@ -1,7 +1,7 @@
 import sqlite3
 
 
-class Database:
+class Phone:
     def __init__(self):
         self.connection = sqlite3.connect("p3.db")
         self.cursor = self.connection.cursor()
@@ -27,11 +27,16 @@ class Database:
         """, (name, age, phone_number, email, photo))
         self.connection.commit()
 
-    def all_user(self):
-        self.cursor.execute("""
-            select * from user
+    def all_user(self, offset, limit):
+        self.cursor.execute(f"""
+            SELECT * FROM products LIMIT {limit} OFFSET {offset}
         """)
         return self.cursor.fetchall()
+
+    # Barcha productlar sonini olish
+    def get_total_users(self):
+        self.cursor.execute("SELECT COUNT(*) FROM products")
+        return self.cursor.fetchone()[0]
 
     def get_user(self, id):
         self.cursor.execute("""
